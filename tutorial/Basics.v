@@ -1217,9 +1217,12 @@ Proof.
 Theorem beq_nat_refl : forall n : nat,
   true = beq_nat n n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. induction n as [|n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = S n'".
+    simpl. rewrite -> IHn'. reflexivity. Qed.
 (** [] *)
-
 
 (* ###################################################################### *)
 (** * Proofs Within Proofs *)
@@ -1304,7 +1307,12 @@ Proof.
 Theorem plus_swap : forall n m p : nat, 
   n + (m + p) = m + (n + p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p.
+  rewrite -> plus_assoc. rewrite -> plus_assoc.
+  assert (H: n + m = m + n).
+    Case "Proof of assertion".
+    rewrite -> plus_comm. reflexivity.
+  rewrite -> H. reflexivity. Qed.
 
 
 (** Now prove commutativity of multiplication.  (You will probably
@@ -1315,7 +1323,7 @@ Proof.
 Theorem mult_comm : forall m n : nat,
  m * n = n * m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  
 (** [] *)
 
 (** **** Exercise: 2 stars, optional (evenb_n__oddb_Sn) *)
