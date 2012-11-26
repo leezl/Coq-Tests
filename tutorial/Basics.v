@@ -1319,10 +1319,19 @@ Proof.
     need to define and prove a separate subsidiary theorem to be used
     in the proof of this one.)  You may find that [plus_swap] comes in
     handy. *)
+(**Theorem mult_assoc : forall m n : nat,
+ (m * n) * p = m * (n * p).*)
 
 Theorem mult_comm : forall m n : nat,
  m * n = n * m.
 Proof.
+  intros n m. induction n as [|n'].
+  Case "n=0".
+    simpl. rewrite -> mult_0_r. reflexivity.
+  Case "n = S n'".
+    simpl. rewrite -> IHn'. rewrite <- plus_1_l. 
+    assert (m * (1 + n')).
+    SCase "Proof of assertion".
   
 (** [] *)
 
